@@ -18,6 +18,7 @@ public class Blackjack2 {
         double playerMoney = 1000.00;
 
         Scanner userInput = new Scanner(System.in);
+        boolean endRound = false;
 
 
         while(playerMoney>0){
@@ -28,8 +29,7 @@ public class Blackjack2 {
                 break;
             }
 
-            boolean endRound = false;
-
+            
             playerDeck.draw(playingDeck);
             playerDeck.draw(playingDeck);
 
@@ -60,6 +60,7 @@ public class Blackjack2 {
                     }
                 }
                 if(response == 2){
+                    endRound = true;
                     break;
                 }
             }
@@ -75,8 +76,8 @@ public class Blackjack2 {
             while( (dealerDeck.cardsValue() < 17) && (endRound = false)){
                 dealerDeck.draw(playingDeck);
                 System.out.println("Dealer draws: " + dealerDeck.getCard(dealerDeck.deckSize()-1).toString());
-
             }
+            
             System.out.println("Dealer's hand is valued at: " + dealerDeck.cardsValue());
 
             if((dealerDeck.cardsValue() > 21) && (endRound = false)){
@@ -84,6 +85,7 @@ public class Blackjack2 {
                 System.out.println("You Wins!");
                 playerMoney += playerBet;
                 endRound = true;
+                break;
             }
 
 
@@ -111,7 +113,7 @@ public class Blackjack2 {
 
         }
 
-        System.out.println("Game Over! You have no money.");
+        System.out.println("Game Over!");
 
 
     }
