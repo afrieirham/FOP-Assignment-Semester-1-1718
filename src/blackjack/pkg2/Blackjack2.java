@@ -25,7 +25,7 @@ public class Blackjack2 {
 
 
         while(playerMoney>0){
-            System.out.println("You have RM" + playerMoney + ", how much would you like to bet?");
+            System.out.printf("You have RM%.2f, how much would you like to bet?\n", playerMoney);
             double playerBet = userInput.nextDouble();
             if(playerBet > playerMoney){
                 System.out.println("You have less money than that.");
@@ -59,7 +59,7 @@ public class Blackjack2 {
                         System.out.println("Player: LOSE!");
                         System.out.println("Dealer: WIN!");
                         System.out.println("Currently valued at: " + playerDeck.cardsValue());
-                        System.out.println("You lost RM" + playerBet);
+                        System.out.printf("You lost RM%.2f\n", playerBet);
                         playerMoney -= playerBet;
                         endRound = 1;
                         playerBust = 1;
@@ -79,7 +79,7 @@ public class Blackjack2 {
 
             System.out.println("Dealer cards: " + dealerDeck.toString());
 
-            while( dealerDeck.cardsValue() <= 17 && playerBust == 2 && endRound == 1){
+            while( dealerDeck.cardsValue() <= 17 && playerBust == 2 && endRound == 2){
                 dealerDeck.draw(playingDeck);
                 System.out.println("Dealer draws: " + dealerDeck.getCard(dealerDeck.deckSize()-1).toString());
 
@@ -87,7 +87,7 @@ public class Blackjack2 {
                     System.out.println("Dealer: Bust!");
                     System.out.println("Player: WIN!");
                     System.out.println("Dealer: LOSE!");
-                    System.out.println("You win RM" + playerBet);
+                    System.out.printf("You win RM%.2f\n", playerBet);
                     playerMoney += playerBet;
                     endRound = 1;
                     dealerBust = 1;
@@ -104,7 +104,7 @@ public class Blackjack2 {
             if( dealerHand > playerHand && playerBust == 2 && dealerBust == 2 && endRound == 2){
                 System.out.println("Player: LOSE!");
                 System.out.println("Dealer: WIN!");
-                System.out.println("You lost RM" + playerBet);
+                System.out.printf("You lost RM%.2f\n", playerBet);
                 playerMoney -= playerBet;
                 endRound = 1;
             }
@@ -117,7 +117,7 @@ public class Blackjack2 {
             else if (playerHand > dealerHand && playerBust == 2 && dealerBust == 2 && endRound == 2 ) {
                 System.out.println("Player: WIN!");
                 System.out.println("Dealer: LOSE!");
-                System.out.println("You win RM" + playerBet);
+                System.out.printf("You win RM%.2f\n", playerBet);
                 playerMoney += playerBet;
                 endRound = 1;
             }
