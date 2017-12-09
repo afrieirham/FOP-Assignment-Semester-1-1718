@@ -19,9 +19,9 @@ public class Blackjack2 {
         double playerMoney = 1000.00;
 
         Scanner userInput = new Scanner(System.in);
-        boolean endRound = false;
-        boolean playerBust = false;
-        boolean dealerBust = false;
+        int endRound = 2;
+        int playerBust = 2;
+        int dealerBust = 2;
 
 
         while(playerMoney>0){
@@ -61,22 +61,25 @@ public class Blackjack2 {
                         System.out.println("Currently valued at: " + playerDeck.cardsValue());
                         System.out.println("You lost RM" + playerBet);
                         playerMoney -= playerBet;
-                        endRound = true;
-                        playerBust = true;
+                        endRound = 1;
+                        playerBust = 1;
                         break;
                     }
+                    endRound = 2;
+                    playerBust = 2;
                 }
                 if(response == 2){
-                    endRound = true;
+                    endRound = 2;
+                    playerBust = 2;
                     break;
                 }
             }
 
-            //if(playerBust == true){break;}
+            //if(playerBust == 1){break;}
 
             System.out.println("Dealer cards: " + dealerDeck.toString());
 
-            while( dealerDeck.cardsValue() <= 17 && playerBust == false){
+            while( dealerDeck.cardsValue() <= 17 && playerBust == 2 && endRound == 1){
                 dealerDeck.draw(playingDeck);
                 System.out.println("Dealer draws: " + dealerDeck.getCard(dealerDeck.deckSize()-1).toString());
 
@@ -86,42 +89,43 @@ public class Blackjack2 {
                     System.out.println("Dealer: LOSE!");
                     System.out.println("You win RM" + playerBet);
                     playerMoney += playerBet;
-                    endRound = true;
-                    dealerBust = true;
+                    endRound = 1;
+                    dealerBust = 1;
                     break;
                 }
             }
 
-
+            int playerHand = playerDeck.cardsValue();
+            int dealerHand = dealerDeck.cardsValue();
             System.out.println("Dealer's hand is valued at: " + dealerDeck.cardsValue());
 
-            if(playerBust == true){playerMoney -= playerBet;}
+            //if(playerBust == 1){playerMoney -= playerBet;}
 
-            if( dealerDeck.cardsValue() > playerDeck.cardsValue() && playerBust == false && dealerBust == false){
+            if( dealerHand > playerHand && playerBust == 2 && dealerBust == 2 && endRound == 2){
                 System.out.println("Player: LOSE!");
                 System.out.println("Dealer: WIN!");
                 System.out.println("You lost RM" + playerBet);
-                playerMoney += playerBet;
-                endRound = true;
+                playerMoney -= playerBet;
+                endRound = 1;
             }
 
-            else if(playerDeck.cardsValue() == dealerDeck.cardsValue()){
+            else if(playerHand == dealerHand && playerBust == 2 && dealerBust == 2 && endRound == 2){
                 System.out.println("Push");
-                endRound = true;
+                endRound = 1;
             }
 
-            else if (playerDeck.cardsValue() > dealerDeck.cardsValue() && playerBust == false ) {
+            else if (playerHand > dealerHand && playerBust == 2 && dealerBust == 2 && endRound == 2 ) {
                 System.out.println("Player: WIN!");
                 System.out.println("Dealer: LOSE!");
                 System.out.println("You win RM" + playerBet);
                 playerMoney += playerBet;
-                endRound = true;
+                endRound = 1;
             }
 
-            // else if( (endRound == false) && (playerBust == false) && (dealerBust == false)){
+            // else if( (endRound == 2) && (playerBust == 2) && (dealerBust == 2)){
             //     System.out.println("You lose");
             //     playerMoney -= playerBet;
-            //     endRound = true;
+            //     endRound = 1;
             // }
 
             //if( playerDeck.cardsValue()  >  dealerDeck.cardsValue()) {playerMoney += playerBet;}
